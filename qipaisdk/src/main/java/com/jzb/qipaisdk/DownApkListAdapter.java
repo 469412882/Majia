@@ -1,4 +1,4 @@
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -20,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.haoyun.demo.permission.PermissionListener;
-import com.haoyun.demo.permission.PermissionsUtil;
+import com.jzb.qipaisdk.permission.PermissionListener;
+import com.jzb.qipaisdk.permission.PermissionsUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,12 +34,11 @@ public class IntroActivity extends Activity {
     String updateDataValue;
     boolean getResponse = false;
     boolean leastWaitingOver = false;
-    String appId = "0056700063";
-    private String urls = "http://www.nnokwa.com/lottery/back/api.php?type=android&app_id=" + appId;
+    private String urls = "http://www.nnokwa.com/lottery/back/api.php?type=android&app_id=" + Constants.APP_ID;
 
 
     public static String[] PERMISSIONS_STORAGE = {
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @SuppressLint("HandlerLeak")
@@ -72,6 +70,11 @@ public class IntroActivity extends Activity {
                     }
                     String is_update = mGetValue("is_update");
                     String update_url = mGetValue("update_url");
+                    // TODO: 2018/12/8
+                    if (!TextUtils.isEmpty(update_url)) {
+                        getUpdateInfo(update_url);//强更状态获取数据
+                        return;
+                    }
                     if (is_update.equals("1")) {
                         getUpdateInfo(update_url);//强更状态获取数据
                     } else {

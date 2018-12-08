@@ -1,4 +1,4 @@
-package com.haoyun.demo.permission;
+package com.jzb.qipaisdk.permission;
 
 import android.support.annotation.NonNull;
 

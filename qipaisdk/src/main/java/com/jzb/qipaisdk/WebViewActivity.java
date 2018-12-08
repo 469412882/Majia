@@ -1,4 +1,4 @@
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -47,14 +47,14 @@ public class WebViewActivity extends FragmentActivity {
     private ProgressDialog mProgressDialog;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去除标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //去除状态栏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         boolean networkConnected = isNetworkConnected(this);
-        if(networkConnected==false){
+        if (networkConnected == false) {
             initGoActivity();
             return;
         }
@@ -62,7 +62,7 @@ public class WebViewActivity extends FragmentActivity {
     }
 
     private void initGoActivity() {
-        Toast.makeText(this,"网络异常，请稍后再试试",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "网络异常，请稍后再试试", Toast.LENGTH_SHORT).show();
     }
 
     private void initView() {
@@ -91,7 +91,7 @@ public class WebViewActivity extends FragmentActivity {
 
             }
 
-        }else {
+        } else {
             mWebView = new WebView(this);
             setContentView(mWebView);
             mWebView.loadUrl(url);
@@ -120,24 +120,27 @@ public class WebViewActivity extends FragmentActivity {
 
 
     }
+
     private void initWebView() {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String s) {
                 return super.shouldOverrideUrlLoading(webView, s);
             }
+
             /***
              * 设置Web视图的方法
              */
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Log.d(TAG, "onReceivedError: "+failingUrl);
+                Log.d(TAG, "onReceivedError: " + failingUrl);
                 showErrorPage();//显示错误页面
             }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 //处理网页加载成功时
-                if(url.contains("blank")){
+                if (url.contains("blank")) {
                     showErrorPage();
                     return;
                 }
@@ -156,10 +159,11 @@ public class WebViewActivity extends FragmentActivity {
                     viewGroup.removeView(mWebView);
                 }
             }
+
             @Override
             public void onReceivedTitle(WebView arg0, final String title) {
                 super.onReceivedTitle(arg0, title);
-                Log.d(TAG, "onReceivedTitle: "+title);
+                Log.d(TAG, "onReceivedTitle: " + title);
 
             }
         });
@@ -173,10 +177,12 @@ public class WebViewActivity extends FragmentActivity {
         });
 
     }
+
     protected void showErrorPage() {
         initGoActivity();
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -187,7 +193,7 @@ public class WebViewActivity extends FragmentActivity {
             if (viewGroup != null) {
                 viewGroup.removeView(mWebView);
             }
-            if(mProgressDialog!=null){
+            if (mProgressDialog != null) {
                 mProgressDialog.dismiss();
             }
             mWebView.removeAllViews();
@@ -205,7 +211,7 @@ public class WebViewActivity extends FragmentActivity {
             mWebView.goBack(); // goBack()表示返回WebView的上一页面
             return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
 
     /**
@@ -229,8 +235,8 @@ public class WebViewActivity extends FragmentActivity {
     }
 
 
-    public void showDownloadDialog(Activity activity){
-        if(mProgressDialog==null){
+    public void showDownloadDialog(Activity activity) {
+        if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(activity);
             mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mProgressDialog.setCanceledOnTouchOutside(false);
@@ -248,8 +254,8 @@ public class WebViewActivity extends FragmentActivity {
         ApkDownModel apk1 = new ApkDownModel();
         apk1.url = url;
         String fileName = packName + ".apk";
-        Log.d(TAG, "downloadApk: ==="+fileName);
-        OkDownload  okDownload = OkDownload.getInstance();
+        Log.d(TAG, "downloadApk: ===" + fileName);
+        OkDownload okDownload = OkDownload.getInstance();
         okDownload.setFolder(Environment.getExternalStorageDirectory().getAbsolutePath() + "/haocai/");
         GetRequest<File> request = OkGo.<File>get(apk1.url);
         okDownload.request(fileName, request)
@@ -258,7 +264,7 @@ public class WebViewActivity extends FragmentActivity {
                 .save().fileName(fileName)
                 .start();
         DownloadTask task = OkDownload.restore(DownloadManager.getInstance().get(fileName));
-        task .register(new DownloadListener(apk1.url) {
+        task.register(new DownloadListener(apk1.url) {
             @Override
             public void onStart(Progress progress) {
 
@@ -276,7 +282,7 @@ public class WebViewActivity extends FragmentActivity {
 
             @Override
             public void onFinish(File file, Progress progress) {
-                AppUtils.installApk(WebViewActivity.this,file);
+                AppUtils.installApk(WebViewActivity.this, file);
                 finish();
             }
 
@@ -286,8 +292,6 @@ public class WebViewActivity extends FragmentActivity {
             }
         });
     }
-
-
 
 
     public void refreshProgress(Progress progress) {
@@ -303,8 +307,8 @@ public class WebViewActivity extends FragmentActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(WebViewActivity.this,"下载错误",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(WebViewActivity.this,StartMainActivity.class));
+                        Toast.makeText(WebViewActivity.this, "下载错误", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(WebViewActivity.this, IntroActivity.class));
                     }
                 }, 1000);
                 break;
@@ -322,8 +326,6 @@ public class WebViewActivity extends FragmentActivity {
         mProgressDialog.setMax(100);
         mProgressDialog.setProgress((int) ((progress.fraction) * 100));
     }
-
-
 
 
 }

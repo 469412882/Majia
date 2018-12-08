@@ -1,4 +1,4 @@
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,7 +41,7 @@ public class JPBroadcastReceiver extends BroadcastReceiver {
             Log.d(TAG, "[JPBroadcastReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.d(TAG, "[JPBroadcastReceiver] 接收到推送下来的通知的ID: " + notifactionId);
-			Intent i = new Intent(context, StartMainActivity.class);
+			Intent i = new Intent(context, IntroActivity.class);
 			i.putExtras(bundle);
 			//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
@@ -50,7 +50,7 @@ public class JPBroadcastReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[JPBroadcastReceiver] 用户点击打开了通知");
         	//打开自定义的Activity
-        	Intent i = new Intent(context, StartMainActivity.class);
+        	Intent i = new Intent(context, IntroActivity.class);
         	i.putExtras(bundle);
         	//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );

@@ -1,4 +1,4 @@
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.haoyun.demo;
+package com.jzb.qipaisdk;
 
 import java.io.Serializable;
 import java.util.Random;
