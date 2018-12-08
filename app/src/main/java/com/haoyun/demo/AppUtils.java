@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -43,6 +44,11 @@ import java.util.Map;
 public class AppUtils {
     private static final String TAG = "AppUtils";
     public static boolean isPrintException = true;
+
+    public static int getDrawableIdByName(Context context, String drawableName) {
+        ApplicationInfo appInfo = context.getApplicationInfo();
+        return context.getResources().getIdentifier(drawableName, "drawable", appInfo.packageName);
+    }
 
     public static Map<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
         if (sourceObj == null) {
