@@ -2,6 +2,7 @@ package com.jzb.qipaisdk;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -28,14 +30,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.jzb.qipaisdk.viewpager.CommonViewPagerAdapter;
+import com.jzb.qipaisdk.viewpager.LooperViewPager;
 import com.lzy.okgo.db.DownloadManager;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadTask;
 import com.lzy.okserver.task.XExecutor;
-import com.youth.banner.Banner;
-import com.youth.banner.listener.OnBannerListener;
-import com.zhy.autolayout.AutoLayoutActivity;
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.OnAllTaskEndListener, DownApkListAdapter.OnReloadListener {
+public class UpdateListActivity extends Activity implements XExecutor.OnAllTaskEndListener, DownApkListAdapter.OnReloadListener {
     ArrayList<Map<String, String>> list;
     ArrayList<Map<String, String>> banner_list;
     private ArrayList<String> list_path;
@@ -71,11 +72,13 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
     private TextView mTv_right;
 
     private RelativeLayout mRelay_top;
-    private Banner mImage_banner;
     private LinearLayout mLl_announcement;
     private ImageView mImg_gb;
     private TextView mTv_pao;
     private View mV_line;
+
+    private LooperViewPager mBannerVp;
+    private CommonViewPagerAdapter<String> mBannerAdapter;
 
     /**
      * 解决Subscription内存泄露问题
@@ -101,14 +104,13 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
         mTv_title = findViewById(R.id.tv_title);
         mTv_right = findViewById(R.id.tv_right);
         mRelay_top = findViewById(R.id.relay_top);
-        mImage_banner = findViewById(R.id.image_banner);
 
         mLl_announcement = findViewById(R.id.ll_announcement);
         mImg_gb = findViewById(R.id.img_gb);
         mTv_pao = findViewById(R.id.tv_pao);
         mV_line = findViewById(R.id.v_line);
 
-
+        mBannerVp = findViewById(R.id.banner_vp);
 
     }
 
@@ -181,7 +183,7 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
 
                         dy = rawY - firstY > 0 ? rawY - lastY : rawY - lastY;//如果是从起点开始滑动的话，不让按钮向下滑动
                         dx = rawX - firstX > 0 ? rawX - lastX : rawX - lastX;//如果是从起点开始滑动的话，不让按钮向下滑动
-                        setButtonMargin(dx, dy);
+//                        setButtonMargin(dx, dy);
                         break;
 
                 }
@@ -207,30 +209,6 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
         initData();
     }
 
-
-
-    private void setButtonMargin(int dX, int dY) {
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                AutoUtils.getPercentWidthSize(300), AutoUtils.getPercentHeightSize(300));
-        int top = mTop + dY;
-        int left = mLeft + dX;
-        int l = AppUtils.getScreenWidth(this) - mMeasuredWidth;
-        int t = AppUtils.getScreenHeight(this) - mMeasuredHeight - getStatusBarHeight();
-        //设置left和top的边界值
-        if (left < 0) {
-            left = 0;
-        } else if (left > l) {
-            left = l;
-        }
-        if (top < 0) {
-            top = 0;
-        } else if (top > t) {
-            top = t;
-        }
-        layoutParams.topMargin = top;
-        layoutParams.leftMargin = left;
-        img_red_envelope.setLayoutParams(layoutParams);
-    }
 
     /**
      * 用于获取状态栏的高度。
@@ -300,7 +278,6 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
         mTv_title.setText(title.get("text"));
         mTv_title.setTextColor(Color.parseColor(title.get("text_color")));
         mRelay_top.setBackgroundColor(Color.parseColor(title.get("text_bg")));
-        mTv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, AutoUtils.getPercentWidthSize(Integer.parseInt(title.get("text_size"))));
 
         String text_right = title.get("text_right");
         if(AppUtils.isEmpty(text_right)){
@@ -308,7 +285,6 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
         }else {
             mTv_right.setText(title.get("text_right"));
             mTv_right.setTextColor(Color.parseColor(title.get("text_right_color")));
-            mTv_right.setTextSize(TypedValue.COMPLEX_UNIT_PX, AutoUtils.getPercentWidthSize(Integer.parseInt(title.get("text_right_size"))));
 
             final String text_right_type = title.get("text_right_type");
             mTv_right.setOnClickListener(new View.OnClickListener() {
@@ -355,26 +331,52 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
             });
 
         }
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mTv_title.getLayoutParams();
-        params.height = AutoUtils.getPercentHeightSize(Integer.parseInt(title.get("text_bg_h")));
-        mTv_title.setLayoutParams(params);
     }
 
     public void goNext3() {
         banner_list = AppUtils.parseKeyAndValueToMapList(stringMap.get("banner"));
-        if(banner_list.size()<0){
-            mImage_banner.setVisibility(View.GONE);
+        if(banner_list.size()<=0){
+            mBannerVp.setVisibility(View.GONE);
         }else {
             List<String> bannerImageList=new ArrayList<>();
             for (int i=0;i<banner_list.size();i++){
                 String img_url = banner_list.get(i).get("banner");
                 bannerImageList.add(img_url);
             }
-            mImage_banner.setVisibility(View.VISIBLE);
-            mImage_banner.setImageLoader(new AppUtils.GlideImageLoader());
-            mImage_banner.setImages(bannerImageList);
-            mImage_banner.start();
+            mBannerVp.setVisibility(View.VISIBLE);
+
+            mBannerVp.setAdapter(mBannerAdapter = new CommonViewPagerAdapter<String>(this,
+                    R.layout.banner_item, bannerImageList) {
+                @Override
+                protected void convert(View view, final String itemData, final int position) {
+                    Glide.with(UpdateListActivity.this).load(itemData).into((ImageView) view);
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (TextUtils.isEmpty(itemData)) {
+                                return;
+                            }
+                            if (!TextUtils.isEmpty(list.get(position).get("packname")) && AppUtils.isAppExist(UpdateListActivity.this, list.get(position).get("packname"))) {
+                                Intent intent = new Intent();
+                                PackageManager packageManager = UpdateListActivity.this.getPackageManager();
+                                intent = packageManager.getLaunchIntentForPackage(list.get(position).get("packname"));
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                UpdateListActivity.this.startActivity(intent);
+                            }else {
+                                if (itemData.startsWith("http")) {
+                                    Intent bundle = new Intent(UpdateListActivity.this, WebViewActivity.class);
+                                    bundle.putExtra("url", banner_list.get(position).get("banner_url"));
+                                    bundle.putExtra("packName", banner_list.get(position).get("packname"));
+                                    bundle.putExtra("img_bg_url", banner_list.get(position).get("img_bg_url"));
+                                    UpdateListActivity.this.startActivity(bundle);
+                                    return;
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+            mBannerAdapter.notifyDataSetChanged();
 
             mLl_announcement.setVisibility(View.VISIBLE);
             mV_line.setVisibility(View.VISIBLE);
@@ -385,33 +387,6 @@ public class UpdateListActivity extends AutoLayoutActivity implements XExecutor.
                 AppUtils.disImage(UpdateListActivity.this, img_url3, mImg_gb);
             }
             mTv_pao.setText(test.get("text"));
-
-            mImage_banner.setOnBannerListener(new OnBannerListener() {
-                @Override
-                public void OnBannerClick(int position) {
-                    String url = banner_list.get(position).get("banner_url");
-                    if (TextUtils.isEmpty(url)) {
-                        return;
-                    }
-                    if (!TextUtils.isEmpty(list.get(position).get("packname")) && AppUtils.isAppExist(UpdateListActivity.this, list.get(position).get("packname"))) {
-                        Intent intent = new Intent();
-                        PackageManager packageManager = UpdateListActivity.this.getPackageManager();
-                        intent = packageManager.getLaunchIntentForPackage(list.get(position).get("packname"));
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        UpdateListActivity.this.startActivity(intent);
-                    }else {
-                        if (url.startsWith("http")) {
-                            Intent bundle = new Intent(UpdateListActivity.this, WebViewActivity.class);
-                            bundle.putExtra("url", banner_list.get(position).get("banner_url"));
-                            bundle.putExtra("packName", banner_list.get(position).get("packname"));
-                            bundle.putExtra("img_bg_url", banner_list.get(position).get("img_bg_url"));
-                            UpdateListActivity.this.startActivity(bundle);
-                            return;
-                        }
-                    }
-
-                }
-            });
         }
 
         LinearLayoutManager manager2 = new LinearLayoutManager(UpdateListActivity.this);

@@ -19,7 +19,6 @@ import com.lzy.okgo.request.GetRequest;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadListener;
 import com.lzy.okserver.download.DownloadTask;
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.io.File;
 import java.text.NumberFormat;
@@ -244,7 +243,6 @@ public class DownApkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
             img_bottom = itemView.findViewById(R.id.img_bottom);
-            AutoUtils.autoSize(itemView);
         }
 
         public void setTag(String tag) {
