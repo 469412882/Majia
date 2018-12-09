@@ -90,15 +90,13 @@ public class AppUtils {
             return;
         }
         Glide.with(context)
-                .load(imgUrl).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .load(imgUrl)
                 .into(imgv);
     }
 
 
     public static void disImgRound(Context context, String imgUrl, ImageView imgv) {
-        Glide.with(context).load(imgUrl)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .crossFade().into(imgv);
+        Glide.with(context).load(imgUrl).into(imgv);
 
     }
 
