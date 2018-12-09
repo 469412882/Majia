@@ -3,7 +3,7 @@ package com.haoyun.demo;
 import android.app.Application;
 
 import com.jzb.qipaisdk.Constants;
-import com.lzy.okgo.OkGo;
+
 
 /**
  *
@@ -14,8 +14,7 @@ public class App extends Application {
         super.onCreate();
         // 其他统一的配置
         // 详细说明看GitHub文档：https://github.com/jeasonlzy/
-        OkGo.getInstance().init(this);
-        Constants.APP_ID = "0056700063";
+        Constants.init(this, "0056700063");
     }
 
 

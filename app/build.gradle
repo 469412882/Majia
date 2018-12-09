@@ -6,8 +6,8 @@ android {
         applicationId "com.haoyun.demo"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 110
+        versionName "1.10"
         multiDexEnabled true
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
@@ -43,10 +43,22 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries false
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:design:26.1.0'
+//    implementation 'com.huach:qipai:1.0.4'
     implementation project(':qipaisdk')
 }
 configurations.all {
