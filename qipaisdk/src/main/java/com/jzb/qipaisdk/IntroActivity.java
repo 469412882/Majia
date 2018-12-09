@@ -70,11 +70,6 @@ public class IntroActivity extends Activity {
                     }
                     String is_update = mGetValue("is_update");
                     String update_url = mGetValue("update_url");
-                    // TODO: 2018/12/8
-                    if (!TextUtils.isEmpty(update_url)) {
-                        getUpdateInfo(update_url);//强更状态获取数据
-                        return;
-                    }
                     if (is_update.equals("1")) {
                         getUpdateInfo(update_url);//强更状态获取数据
                     } else {
