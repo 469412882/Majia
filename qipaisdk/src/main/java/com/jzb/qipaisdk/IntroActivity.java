@@ -98,7 +98,12 @@ public class IntroActivity extends Activity {
     }
 
     private void goMainActivity() {
-        intentToWebViewActivity("http://www.cwlchina.com/");
+        if (Constants.mainClass != null) {
+            Intent intent = new Intent(IntroActivity.this, Constants.mainClass);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(0, 0);
+        }
     }
 
     private void intentToWebViewActivity(String wap_url) {
