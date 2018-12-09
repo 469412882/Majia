@@ -161,7 +161,7 @@ public class AppUtils {
             field = drawable.getField(imageName);
             r_id = field.getInt(field.getName());
         } catch (Exception e) {
-            r_id = R.mipmap.ic_gonggao;
+            r_id = R.drawable.ic_gonggao;
             Log.e("ERROR", "PICTURE NOT　FOUND！");
         }
         return r_id;

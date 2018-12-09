@@ -110,31 +110,31 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_wuxin" />
+                    android:src="@drawable/ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_wuxin" />
+                    android:src="@drawable/ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_wuxin" />
+                    android:src="@drawable/ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_wuxin" />
+                    android:src="@drawable/ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_wuxin" />
+                    android:src="@drawable/ic_wuxin" />
             </LinearLayout>
 
         </LinearLayout>
@@ -153,6 +153,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_lllll"
+        android:src="@drawable/ic_lllll"
         android:visibility="gone" />
 </LinearLayout>
