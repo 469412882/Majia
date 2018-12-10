@@ -46,7 +46,7 @@ package com.jzb.qipaisdk.bean;
 		"img": "http://bmob-cdn-22506.b0.upaiyun.com/2018/11/23/eb20e99e4068ebc7802e62ef07901c44.png",
 		"img_bg_url": "http://bmob-cdn-22506.b0.upaiyun.com/2018/11/28/836103a440eae78a80cb3d4ec65845aa.png",
 		"background": "http://bmob-cdn-22506.b0.upaiyun.com/2018/11/22/85519f354011b96d808aa5a1fd9675b9.png",
-		"img_gonggao": "ic_gonggao",
+		"img_gonggao": "z_p_ic_gonggao",
 		"img_b": "ic_b_hongbao",
 		"img_url": "http://bmob-cdn-22506.b0.upaiyun.com/2018/11/28/1b20e6c24000b6ec800f9ae5b992a13a.apk",
 		"img_b_link": "http://www.baidu.com",

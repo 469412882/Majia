@@ -23,7 +23,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -161,7 +160,7 @@ public class AppUtils {
             field = drawable.getField(imageName);
             r_id = field.getInt(field.getName());
         } catch (Exception e) {
-            r_id = R.drawable.ic_gonggao;
+            r_id = R.drawable.z_p_ic_gonggao;
             Log.e("ERROR", "PICTURE NOT　FOUND！");
         }
         return r_id;

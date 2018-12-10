@@ -73,7 +73,7 @@
             tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
+                android:resource="@xml/z_p_file_paths"
                 tools:replace="android:resource"/>
         </provider>
 
@@ -150,7 +150,7 @@
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
-            android:theme="@style/MyDialog">
+            android:theme="@style/z_p_MyDialog">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="${applicationId}"/>

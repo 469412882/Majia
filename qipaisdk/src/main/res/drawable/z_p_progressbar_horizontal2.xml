@@ -9,7 +9,7 @@
             <!--<solid android:color="#ffffff" />-->
             <stroke
                 android:width="1px"
-                android:color="@color/yy_05" />
+                android:color="@color/z_p_yy_05" />
         </shape>
     </item>
 
@@ -18,7 +18,7 @@
             <shape>
                 <corners android:radius="3dp" />
 
-                <solid android:color="@color/yy_05" />
+                <solid android:color="@color/z_p_yy_05" />
             </shape>
         </clip>
     </item>

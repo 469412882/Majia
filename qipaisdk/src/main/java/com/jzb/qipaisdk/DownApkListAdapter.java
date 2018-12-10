@@ -59,7 +59,7 @@ public class DownApkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        view = inflater.inflate(R.layout.item_update_list, parent, false);
+        view = inflater.inflate(R.layout.z_p_item_update_list, parent, false);
         return new fGoldViewHolder(view);
     }
 

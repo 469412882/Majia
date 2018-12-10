@@ -16,8 +16,6 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -129,7 +127,7 @@ public class UpdateListActivity extends Activity implements XExecutor.OnAllTaskE
         //去除状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_update_list);
+        setContentView(R.layout.z_p_activity_update_list);
         initView();
         okDownload = OkDownload.getInstance();
         okDownload.addOnAllTaskEndListener(this);
@@ -346,7 +344,7 @@ public class UpdateListActivity extends Activity implements XExecutor.OnAllTaskE
             mBannerVp.setVisibility(View.VISIBLE);
 
             mBannerVp.setAdapter(mBannerAdapter = new CommonViewPagerAdapter<String>(this,
-                    R.layout.banner_item, bannerImageList) {
+                    R.layout.z_p_banner_item, bannerImageList) {
                 @Override
                 protected void convert(View view, final String itemData, final int position) {
                     Glide.with(UpdateListActivity.this).load(itemData).into((ImageView) view);

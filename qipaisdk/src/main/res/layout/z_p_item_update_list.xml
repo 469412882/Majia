@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="好彩彩票"
-                android:textColor="@color/yy_02"
+                android:textColor="@color/z_p_yy_02"
                 android:textSize="18sp" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text=""
-                android:textColor="@color/yy_03"
+                android:textColor="@color/z_p_yy_03"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -68,10 +68,10 @@
                     android:id="@+id/tv_down"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/down_apk_bg"
+                    android:background="@drawable/z_p_down_apk_bg"
                     android:gravity="center"
                     android:text="下载"
-                    android:textColor="@color/yy_04"
+                    android:textColor="@color/z_p_yy_04"
                     android:textSize="14sp" />
 
                 <RelativeLayout
@@ -85,7 +85,7 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:progressDrawable="@drawable/progressbar_horizontal2"
+                        android:progressDrawable="@drawable/z_p_progressbar_horizontal2"
                         android:visibility="visible" />
 
                     <TextView
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="下载"
-                        android:textColor="@color/yy_04"
+                        android:textColor="@color/z_p_yy_04"
                         android:textSize="14sp" />
                 </RelativeLayout>
 
@@ -110,31 +110,31 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_wuxin" />
+                    android:src="@drawable/z_p_ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_wuxin" />
+                    android:src="@drawable/z_p_ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_wuxin" />
+                    android:src="@drawable/z_p_ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_wuxin" />
+                    android:src="@drawable/z_p_ic_wuxin" />
 
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_wuxin" />
+                    android:src="@drawable/z_p_ic_wuxin" />
             </LinearLayout>
 
         </LinearLayout>
@@ -153,6 +153,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_lllll"
+        android:src="@drawable/z_p_ic_lllll"
         android:visibility="gone" />
 </LinearLayout>

@@ -6,5 +6,5 @@
 
     <!--<solid android:color="#fff" />-->
 
-    <stroke android:color="@color/yy_05" android:width="1px"/>
+    <stroke android:color="@color/z_p_yy_05" android:width="1px"/>
 </shape>
