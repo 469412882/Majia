@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
+    android:id="@+id/z_p_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5">
 
     <ImageView
-        android:id="@+id/img_bg"
+        android:id="@+id/z_p_img_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:visibility="gone" />
 
     <RelativeLayout
-        android:id="@+id/relay_top"
+        android:id="@+id/z_p_relay_top"
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/z_p_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -29,7 +29,7 @@
             android:textColor="#fff" />
 
         <TextView
-            android:id="@+id/tv_right"
+            android:id="@+id/z_p_tv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -47,16 +47,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relay_top"
+        android:layout_below="@+id/z_p_relay_top"
         android:orientation="vertical">
 
         <com.jzb.qipaisdk.viewpager.LooperViewPager
-            android:id="@+id/banner_vp"
+            android:id="@+id/z_p_banner_vp"
             android:layout_width="match_parent"
             android:layout_height="190dp" />
 
         <LinearLayout
-            android:id="@+id/ll_announcement"
+            android:id="@+id/z_p_ll_announcement"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:background="#fff"
@@ -66,14 +66,14 @@
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/img_gb"
+                android:id="@+id/z_p_img_gb"
                 android:layout_width="45px"
                 android:layout_height="45px"
                 android:layout_marginRight="20px"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/tv_pao"
+                android:id="@+id/z_p_tv_pao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -87,14 +87,14 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/v_line"
+            android:id="@+id/z_p_v_line"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#dbdbdb"
             android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/z_p_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="5px" />
@@ -104,7 +104,7 @@
 
 
     <ImageView
-        android:id="@+id/img_red_envelope"
+        android:id="@+id/z_p_img_red_envelope"
         android:layout_width="300px"
         android:layout_height="300px"
         android:layout_alignParentRight="true"

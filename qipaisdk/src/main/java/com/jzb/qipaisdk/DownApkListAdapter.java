@@ -230,19 +230,19 @@ public class DownApkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public fGoldViewHolder(View itemView) {
             super(itemView);
-            tv_down = itemView.findViewById(R.id.tv_down);
-            tv_01 = itemView.findViewById(R.id.tv_01);
-            tv_name = itemView.findViewById(R.id.tv_name);
-            tv_name2 = itemView.findViewById(R.id.tv_name2);
-            img_background = itemView.findViewById(R.id.img_background);
+            tv_down = itemView.findViewById(R.id.z_p_tv_down);
+            tv_01 = itemView.findViewById(R.id.z_p_tv_01);
+            tv_name = itemView.findViewById(R.id.z_p_tv_name);
+            tv_name2 = itemView.findViewById(R.id.z_p_tv_name2);
+            img_background = itemView.findViewById(R.id.z_p_img_background);
 
-            pbProgress = itemView.findViewById(R.id.pbProgress);
-            relay_01 = itemView.findViewById(R.id.relay_01);
-            relay_pro = itemView.findViewById(R.id.relay_pro);
+            pbProgress = itemView.findViewById(R.id.z_p_pbProgress);
+            relay_01 = itemView.findViewById(R.id.z_p_relay_01);
+            relay_pro = itemView.findViewById(R.id.z_p_relay_pro);
 
 
 
-            img_bottom = itemView.findViewById(R.id.img_bottom);
+            img_bottom = itemView.findViewById(R.id.z_p_img_bottom);
         }
 
         public void setTag(String tag) {

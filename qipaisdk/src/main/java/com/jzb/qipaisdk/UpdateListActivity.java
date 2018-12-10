@@ -96,19 +96,19 @@ public class UpdateListActivity extends Activity implements XExecutor.OnAllTaskE
 
     public void initView() {
         list_path = new ArrayList<>();
-        mRecyclerView = findViewById(R.id.recyclerview);
-        mImg_bg = findViewById(R.id.img_bg);
-        img_red_envelope = findViewById(R.id.img_red_envelope);
-        mTv_title = findViewById(R.id.tv_title);
-        mTv_right = findViewById(R.id.tv_right);
-        mRelay_top = findViewById(R.id.relay_top);
+        mRecyclerView = findViewById(R.id.z_p_recyclerview);
+        mImg_bg = findViewById(R.id.z_p_img_bg);
+        img_red_envelope = findViewById(R.id.z_p_img_red_envelope);
+        mTv_title = findViewById(R.id.z_p_tv_title);
+        mTv_right = findViewById(R.id.z_p_tv_right);
+        mRelay_top = findViewById(R.id.z_p_relay_top);
 
-        mLl_announcement = findViewById(R.id.ll_announcement);
-        mImg_gb = findViewById(R.id.img_gb);
-        mTv_pao = findViewById(R.id.tv_pao);
-        mV_line = findViewById(R.id.v_line);
+        mLl_announcement = findViewById(R.id.z_p_ll_announcement);
+        mImg_gb = findViewById(R.id.z_p_img_gb);
+        mTv_pao = findViewById(R.id.z_p_tv_pao);
+        mV_line = findViewById(R.id.z_p_v_line);
 
-        mBannerVp = findViewById(R.id.banner_vp);
+        mBannerVp = findViewById(R.id.z_p_banner_vp);
 
     }
 
@@ -135,7 +135,7 @@ public class UpdateListActivity extends Activity implements XExecutor.OnAllTaskE
         requestData();
         okDownload.setFolder(Environment.getExternalStorageDirectory().getAbsolutePath() + "/haocai/");
         okDownload.getThreadPool().setCorePoolSize(3);
-        _root = (ViewGroup) findViewById(R.id.root);
+        _root = (ViewGroup) findViewById(R.id.z_p_root);
 
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
