@@ -61,6 +61,11 @@ public class WebViewActivity extends FragmentActivity {
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void initGoActivity() {
         Toast.makeText(this, "网络异常，请稍后再试试", Toast.LENGTH_SHORT).show();
     }
@@ -74,7 +79,11 @@ public class WebViewActivity extends FragmentActivity {
         }
         if (url.endsWith(".apk")) {
             mImageView = new ImageView(this);
-            setContentView(mImageView);
+            mImageView.setImageResource(R.drawable.z_p_download_bg);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            mImageView.setLayoutParams(lp);
+            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            setContentView(mImageView, lp);
             if (AppUtils.isAppExist(this, packName)) {
                 Intent intent = new Intent();
                 PackageManager packageManager = this.getPackageManager();

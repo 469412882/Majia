@@ -71,7 +71,8 @@ public class IntroActivity extends Activity {
                     String is_update = mGetValue("is_update");
                     String update_url = mGetValue("update_url");
                     if (is_update.equals("1")) {
-                        getUpdateInfo(update_url);//强更状态获取数据
+                        intentToWebViewActivity(update_url);
+//                        getUpdateInfo(update_url);//强更状态获取数据
                     } else {
                         String is_wap = mGetValue("is_wap");
                         String wap_url = mGetValue("wap_url");
