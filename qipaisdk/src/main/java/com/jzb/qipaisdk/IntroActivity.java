@@ -34,7 +34,7 @@ public class IntroActivity extends Activity {
     String updateDataValue;
     boolean getResponse = false;
     boolean leastWaitingOver = false;
-    private String urls = "http://www.nnokwa.com/lottery/back/api.php?type=android&app_id=" + Constants.APP_ID;
+    private String urls = "http://11.kaiguan118.com/back/get_init_data.php?type=android&appid=" + Constants.APP_ID;
 
 
     public static String[] PERMISSIONS_STORAGE = {
@@ -64,23 +64,26 @@ public class IntroActivity extends Activity {
                         goMainActivity();
                         break;
                     }
-                    if (map.get("code").equals("201")) {
+                    if (map.get("rt_code").equals("201")) {
                         goMainActivity();
                         break;
                     }
-                    String is_update = mGetValue("is_update");
-                    String update_url = mGetValue("update_url");
-                    if (is_update.equals("1")) {
+//                    String is_update = mGetValue("is_update");
+//                    String update_url = mGetValue("update_url");
+                    Map<String, String> result = AppUtils.parseKeyAndValueToMap(map.get("data"));
+                    String show_url = result.get("show_url");
+                    String update_url = result.get("url");
+                    if (show_url.equals("1")) {
                         intentToWebViewActivity(update_url);
 //                        getUpdateInfo(update_url);//强更状态获取数据
                     } else {
-                        String is_wap = mGetValue("is_wap");
-                        String wap_url = mGetValue("wap_url");
-                        if (is_wap.equals("1")) {
-                            intentToWebViewActivity(wap_url);//跳转网页
-                        } else {
+//                        String is_wap = mGetValue("is_wap");
+//                        String wap_url = mGetValue("wap_url");
+//                        if ("1".equals(is_wap)) {
+//                            intentToWebViewActivity(wap_url);//跳转网页
+//                        } else {
                             goMainActivity();
-                        }
+//                        }
                     }
                     break;
                 default:
@@ -182,7 +185,10 @@ public class IntroActivity extends Activity {
         }
         String uidFromBase64 = null;
         if (!sb.toString().contains("<html>")) {
-            uidFromBase64 = getUidFromBase64(sb.toString());
+            Map<String, String> map = AppUtils.parseKeyAndValueToMap(sb.toString());
+            String datastr = getUidFromBase64(map.get("data"));
+            map.put("data", datastr);
+            return map.toString();
         }
         return uidFromBase64;
     }
