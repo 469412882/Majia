@@ -250,8 +250,8 @@ public class WebViewActivity extends FragmentActivity {
             mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setTitle("下载中");
-            mProgressDialog.setMessage("更新中...");
+//            mProgressDialog.setTitle("下载中");
+//            mProgressDialog.setMessage("更新中...");
             mProgressDialog.show();
             mProgressDialog.setCancelable(false);
         }

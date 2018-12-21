@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.haoyun.demo"
+        applicationId "com.jzb.demo"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 110
@@ -11,7 +11,7 @@ android {
         multiDexEnabled true
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "14e71447f8ce7ad24cb8e12b", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "fbdbfcad67f943c153ef46c6", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
@@ -58,7 +58,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:design:26.1.0'
-//    implementation 'com.huach:qipaisdk:1.0.6'
+//    implementation 'com.huach:qipaisdk:1.0.7'
     implementation project(':qipaisdk')
 }
 configurations.all {
