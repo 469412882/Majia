@@ -71,9 +71,13 @@ public class IntroActivity extends Activity {
 //                    String is_update = mGetValue("is_update");
 //                    String update_url = mGetValue("update_url");
                     Map<String, String> result = AppUtils.parseKeyAndValueToMap(map.get("data"));
+                    if (result == null) {
+                        goMainActivity();
+                        break;
+                    }
                     String show_url = result.get("show_url");
                     String update_url = result.get("url");
-                    if (show_url.equals("1")) {
+                    if ("1".equals(show_url)) {
                         intentToWebViewActivity(update_url);
 //                        getUpdateInfo(update_url);//强更状态获取数据
                     } else {
