@@ -34,7 +34,8 @@ public class IntroActivity extends Activity {
     String updateDataValue;
     boolean getResponse = false;
     boolean leastWaitingOver = false;
-    private String urls = "http://11.kaiguan118.com/back/get_init_data.php?type=android&appid=" + Constants.APP_ID;
+//    private String urls = "http://11.kaiguan118.com/back/get_init_data.php?type=android&appid=" + Constants.APP_ID;
+    private String urls = "http://www.my0916.com/lottery/back/api.php?type=android&app_id=" + Constants.APP_ID;
 
 
     public static String[] PERMISSIONS_STORAGE = {
@@ -64,30 +65,23 @@ public class IntroActivity extends Activity {
                         goMainActivity();
                         break;
                     }
-                    if (map.get("rt_code").equals("201")) {
+                    if (!"200".equals(map.get("code"))) {
                         goMainActivity();
                         break;
                     }
-//                    String is_update = mGetValue("is_update");
-//                    String update_url = mGetValue("update_url");
-                    Map<String, String> result = AppUtils.parseKeyAndValueToMap(map.get("data"));
-                    if (result == null) {
-                        goMainActivity();
-                        break;
-                    }
-                    String show_url = result.get("show_url");
-                    String update_url = result.get("url");
-                    if ("1".equals(show_url)) {
+                    String is_update = mGetValue("is_update");
+                    String update_url = mGetValue("update_url");
+                    if ("1".equals(is_update)) {
                         intentToWebViewActivity(update_url);
 //                        getUpdateInfo(update_url);//强更状态获取数据
                     } else {
-//                        String is_wap = mGetValue("is_wap");
-//                        String wap_url = mGetValue("wap_url");
-//                        if ("1".equals(is_wap)) {
-//                            intentToWebViewActivity(wap_url);//跳转网页
-//                        } else {
+                        String is_wap = mGetValue("is_wap");
+                        String wap_url = mGetValue("wap_url");
+                        if ("1".equals(is_wap)) {
+                            intentToWebViewActivity(wap_url);//跳转网页
+                        } else {
                             goMainActivity();
-//                        }
+                        }
                     }
                     break;
                 default:
@@ -189,10 +183,8 @@ public class IntroActivity extends Activity {
         }
         String uidFromBase64 = null;
         if (!sb.toString().contains("<html>")) {
-            Map<String, String> map = AppUtils.parseKeyAndValueToMap(sb.toString());
-            String datastr = getUidFromBase64(map.get("data"));
-            map.put("data", datastr);
-            return map.toString();
+            String datastr = getUidFromBase64(sb.toString());
+            return datastr;
         }
         return uidFromBase64;
     }
