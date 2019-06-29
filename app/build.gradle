@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.jzb.demo"
         minSdkVersion 17
@@ -61,19 +62,19 @@ dependencies {
 //    implementation 'com.huach:qipaisdk:1.0.7'
     implementation project(':qipaisdk')
 }
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion '26.1.0'
-            }
-        }
-    }
-    tasks.whenTaskAdded { task ->
-        if (task.name.contains('AndroidTest') || task.name.contains('Test')) {
-            task.enabled = false
-        }
-    }
-
-}
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support') {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion '26.1.0'
+//            }
+//        }
+//    }
+//    tasks.whenTaskAdded { task ->
+//        if (task.name.contains('AndroidTest') || task.name.contains('Test')) {
+//            task.enabled = false
+//        }
+//    }
+//
+//}

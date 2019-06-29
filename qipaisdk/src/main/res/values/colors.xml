@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="z_p_main_color" >#fe7418</color>
-    <color name="z_p_orange" >#FA8C20</color>
-    <color name="z_p_white" >#FFFFFFFF</color>
-    <color name="z_p_yy_01">#444444</color>  <!--跑马灯字体颜色-->
-    <color name="z_p_yy_02">#000000</color>  <!--应用名称字体颜色-->
-    <color name="z_p_yy_03">#808080</color>  <!--应用描述字体颜色-->
-    <color name="z_p_yy_04">#000000</color>  <!--下载字体颜色-->
-    <color name="z_p_yy_05">#3085FF</color>  <!--下载背景颜色-->
-    <color name="z_p_transparent">#00000000</color>
 </resources>

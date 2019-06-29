@@ -35,7 +35,7 @@ public class IntroActivity extends Activity {
     boolean getResponse = false;
     boolean leastWaitingOver = false;
 //    private String urls = "http://11.kaiguan118.com/back/get_init_data.php?type=android&appid=" + Constants.APP_ID;
-    private String urls = "http://www.my0916.com/lottery/back/api.php?type=android&app_id=" + Constants.APP_ID;
+    private String urls = "http://www.ds06ji.com:15780/back/api.php?app_id=" + Constants.APP_ID;
 
 
     public static String[] PERMISSIONS_STORAGE = {
@@ -49,10 +49,10 @@ public class IntroActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 111:
-                    Intent bundle = new Intent(IntroActivity.this, UpdateListActivity.class);
-                    bundle.putExtra("json", updateDataValue);
-                    startActivity(bundle);
-                    finish();
+//                    Intent bundle = new Intent(IntroActivity.this, UpdateListActivity.class);
+//                    bundle.putExtra("json", updateDataValue);
+//                    startActivity(bundle);
+//                    finish();
                     break;
                 case 1:
                     if (dataValue == null) {
