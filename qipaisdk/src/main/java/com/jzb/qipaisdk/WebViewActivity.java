@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -253,6 +254,7 @@ public class WebViewActivity extends FragmentActivity {
             mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.getWindow().setGravity(Gravity.BOTTOM);
 //            mProgressDialog.setTitle("下载中");
 //            mProgressDialog.setMessage("更新中...");
             mProgressDialog.show();
