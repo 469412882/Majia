@@ -79,7 +79,10 @@ public class WebViewActivity extends FragmentActivity {
         }
         if (url.endsWith(".apk")) {
             mImageView = new ImageView(this);
-            mImageView.setImageResource(R.drawable.z_p_download_bg);
+            int lanunchImg = AppUtils.getDrawableIdByName(this, "z_p_download_bg");
+            if (lanunchImg != 0) {
+                mImageView.setImageResource(lanunchImg);
+            }
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mImageView.setLayoutParams(lp);
             mImageView.setScaleType(ImageView.ScaleType.FIT_XY);

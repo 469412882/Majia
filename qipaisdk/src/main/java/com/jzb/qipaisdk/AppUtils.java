@@ -160,7 +160,7 @@ public class AppUtils {
             field = drawable.getField(imageName);
             r_id = field.getInt(field.getName());
         } catch (Exception e) {
-            r_id = R.drawable.z_p_ic_gonggao;
+            r_id = 0;
             Log.e("ERROR", "PICTURE NOT　FOUND！");
         }
         return r_id;
