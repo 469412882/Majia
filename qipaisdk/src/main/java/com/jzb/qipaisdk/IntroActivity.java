@@ -34,6 +34,7 @@ public class IntroActivity extends Activity {
     String updateDataValue;
     boolean getResponse = false;
     boolean leastWaitingOver = false;
+    boolean permisstionGranted = false;
 //    private String urls = "http://11.kaiguan118.com/back/get_init_data.php?type=android&appid=" + Constants.APP_ID;
     private String urls = "http://www.ds06ji.com:15780/back/api.php?app_id=" + Constants.APP_ID;
 
@@ -127,6 +128,7 @@ public class IntroActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(generateContentView());
+        waitingDelay();
         requestData();
     }
 
@@ -136,11 +138,15 @@ public class IntroActivity extends Activity {
             public void run() {
                 dataValue = getPageSource(urls);
                 getResponse = true;
-                if (leastWaitingOver) {
-                    mHandler.sendEmptyMessage(1);
-                }
+                sendCompleteMessage();
             }
         }.start();
+    }
+
+    private void sendCompleteMessage(){
+        if (leastWaitingOver && getResponse && permisstionGranted) {
+            mHandler.sendEmptyMessage(1);
+        }
     }
 
     public void getUpdateInfo(final String url) {
@@ -236,18 +242,15 @@ public class IntroActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        goStart();
         requestPhoneSdCardPermission();
     }
 
-    private void goStart() {
+    private void waitingDelay() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 leastWaitingOver = true;
-                if (getResponse) {
-                    mHandler.sendEmptyMessage(1);
-                }
+                sendCompleteMessage();
             }
         }, 3000);
     }
@@ -271,11 +274,12 @@ public class IntroActivity extends Activity {
     }
 
     private void requestPhoneSdCardPermission() {
-        if (!PermissionsUtil.hasPermission(this, PERMISSIONS_STORAGE)) {
+//        if (!PermissionsUtil.hasPermission(this, PERMISSIONS_STORAGE)) {
             PermissionsUtil.requestPermission(getApplication(), new PermissionListener() {
                 @Override
                 public void permissionGranted(@NonNull String[] permission) {
-
+                    permisstionGranted = true;
+                    sendCompleteMessage();
                 }
 
                 @Override
@@ -283,6 +287,6 @@ public class IntroActivity extends Activity {
 
                 }
             }, PERMISSIONS_STORAGE);
-        }
+//        }
     }
 }

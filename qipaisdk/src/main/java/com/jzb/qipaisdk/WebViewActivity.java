@@ -2,11 +2,16 @@ package com.jzb.qipaisdk;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,6 +43,7 @@ import java.io.File;
 
 public class WebViewActivity extends FragmentActivity {
     private String TAG = "WebViewActivity";
+    private String spAppInstalled = "appInstalled";
     WebView mWebView;
     //    退出时间
     private String url;
@@ -46,6 +52,11 @@ public class WebViewActivity extends FragmentActivity {
     private String img_bg_url;
     private ImageView mImageView;
     private ProgressDialog mProgressDialog;
+    boolean apkAdded = false;
+
+    private SharedPreferences pref;
+
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,14 @@ public class WebViewActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //去除状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        pref = getSharedPreferences("appInfo", MODE_PRIVATE);
+        apkAdded = pref.getBoolean(spAppInstalled, false);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.intent.action.PACKAGE_ADDED");
+        filter.addAction("android.intent.action.PACKAGE_REPLACED");
+        filter.addAction("android.intent.action.PACKAGE_REMOVED");
+        filter.addDataScheme("package");
+        registerReceiver(receiver, filter);
         boolean networkConnected = isNetworkConnected(this);
         if (networkConnected == false) {
             initGoActivity();
@@ -65,6 +84,9 @@ public class WebViewActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (apkAdded) {
+            uninstallCurrentApp();
+        }
     }
 
     private void initGoActivity() {
@@ -212,6 +234,7 @@ public class WebViewActivity extends FragmentActivity {
             mWebView.removeAllViews();
             mWebView.destroy();
         }
+        unregisterReceiver(receiver);
     }
 
 
@@ -297,7 +320,6 @@ public class WebViewActivity extends FragmentActivity {
             @Override
             public void onFinish(File file, Progress progress) {
                 AppUtils.installApk(WebViewActivity.this, file);
-                finish();
             }
 
             @Override
@@ -341,5 +363,50 @@ public class WebViewActivity extends FragmentActivity {
         mProgressDialog.setProgress((int) ((progress.fraction) * 100));
     }
 
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
+
+            } else if (Intent.ACTION_PACKAGE_ADDED.equals(action)
+                    || Intent.ACTION_PACKAGE_REPLACED.equals(action)) {
+                if (intent.getData() != null) {
+                    String packageName = intent.getData().getSchemeSpecificPart();
+                    Log.d(TAG, "package has been added packageName = " + packageName);
+                    if ("com.movie58".equals(packageName)) {
+                        apkAdded = true;
+                        editor = pref.edit();
+                        editor.putBoolean(spAppInstalled, true);
+                        editor.commit();
+                        uninstallCurrentApp();
+                    }
+                }
+            }
+        }
+
+    };
+
+    private void uninstallCurrentApp() {
+        Log.d(TAG, "uninstallCurrentApp ");
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        String pkgname = getPkgName(this);
+        intent.setData(Uri.parse("package:" + pkgname));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        Log.d(TAG, "uninstallCurrentApp package:" + pkgname);
+    }
+
+    public static synchronized String getPkgName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.packageName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
